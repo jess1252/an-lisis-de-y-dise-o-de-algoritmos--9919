@@ -1,1 +1,40 @@
-Public class GenerarContrasena
+import java.util.Random;
+
+public class GenerarContrasena {
+
+    public static void main(String[] args) {
+
+        // Aquí decides qué tipos de caracteres usar
+        boolean usarMayusculas = true;
+        boolean usarMinusculas = true;
+        boolean usarNumeros = true;
+        boolean usarSimbolos = true;
+
+        // Lógica proposicional para formar el conjunto de caracteres
+        String caracteres = "";
+        if (usarMayusculas) caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (usarMinusculas) caracteres += "abcdefghijklmnopqrstuvwxyz";
+        if (usarNumeros) caracteres += "0123456789";
+        if (usarSimbolos) caracteres += "#$%&*";
+
+        // Validación lógica: si no se elige nada, error
+        if (caracteres.equals("")) {
+            System.out.println("Error: debes seleccionar al menos un tipo de carácter.");
+            return;
+        }
+
+        int longitud = 8;  // Puedes cambiar la longitud aquí
+        StringBuilder contrasena = new StringBuilder();
+        Random random = new Random();
+
+        // Generar la contraseña
+        for (int i = 0; i < longitud; i++) {
+            int indice = random.nextInt(caracteres.length());
+            contrasena.append(caracteres.charAt(indice));
+        }
+
+        System.out.println("Contraseña generada: " + contrasena);
+        System.out.println("Total de combinaciones posibles: " +
+            (long) Math.pow(caracteres.length(), longitud));
+    }
+}
