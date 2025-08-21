@@ -38,3 +38,12 @@ public class GenerarContrasena {
             (long) Math.pow(caracteres.length(), longitud));
     }
 }
+
+// realizamlos un metodo para evaluar la fortaleza 
+ 
+Public static string 
+Evaluarfortaleza(string contrasena) {
+     Int nivel = 0;
+If 
+(contrasena.matches(". *[A-Z]. *")) 
+ nivel++;
