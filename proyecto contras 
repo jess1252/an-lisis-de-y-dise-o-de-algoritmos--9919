@@ -47,3 +47,5 @@ Evaluarfortaleza(string contrasena) {
 If 
 (contrasena.matches(". *[A-Z]. *")) 
  nivel++;
+if (contrasena.matches(".*[a-z].*")) nivel++;  // Tiene minúsculas
+if (contrasena.matches(".*[0-9].*")) nivel++; 
