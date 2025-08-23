@@ -49,3 +49,8 @@ If
  nivel++;
 if (contrasena.matches(".*[a-z].*")) nivel++;  // Tiene minúsculas
 if (contrasena.matches(".*[0-9].*")) nivel++; 
+// Tiene números
+if (contrasena.matches(".*[#\\$%&*].*")) nivel++;  
+// Tiene símbolos
+if (contrasena.length() >= 12) nivel++;  
+// Longitud suficiente
