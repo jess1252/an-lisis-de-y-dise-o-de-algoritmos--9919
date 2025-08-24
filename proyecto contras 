@@ -54,3 +54,7 @@ if (contrasena.matches(".*[#\\$%&*].*")) nivel++;
 // Tiene símbolos
 if (contrasena.length() >= 12) nivel++;  
 // Longitud suficiente
+// Clasificación
+   switch (nivel) {
+            case 0:
+            case 1: return "Muy débil ❌" 
