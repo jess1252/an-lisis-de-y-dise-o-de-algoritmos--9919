@@ -1,5 +1,5 @@
 import java.util.Random;
-
+imporr java.util.Arrays;
 public class GenerarContrasena {
 
     public static void main(String[] args) {
@@ -37,7 +37,13 @@ public class GenerarContrasena {
         System.out.println("Total de combinaciones posibles: " +
             (long) Math.pow(caracteres.length(), longitud));
     }
-}
+// ---- Nueva parte: Ordenamiento ----
+        char[] arreglo = contrasena.toString().toCharArray();
+        Arrays.sort(arreglo);  // Ordena los caracteres de menor a mayor
+        System.out.println("Contraseña ordenada: " + new String(arreglo));
+    }
+} 
+
 
 // realizamlos un metodo para evaluar la fortaleza 
  
