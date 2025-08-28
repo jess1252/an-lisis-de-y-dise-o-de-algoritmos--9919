@@ -63,4 +63,7 @@ if (contrasena.length() >= 12) nivel++;
 // Clasificación
    switch (nivel) {
             case 0:
-            case 1: return "Muy débil ❌" 
+            case 1: return "Muy débil ❌"
+            case 2: return "Débil ⚠️";
+            case 3: return "Aceptable 🙂";
+            case 4: return "Fuerte 💪";
