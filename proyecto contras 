@@ -1,5 +1,5 @@
 import java.util.Random;
-imporr java.util.Arrays;
+import java.util.Arrays;
 public class GenerarContrasena {
 
     public static void main(String[] args) {
@@ -68,3 +68,5 @@ if (contrasena.length() >= 12) nivel++;
             case 3: return "Aceptable 🙂";
             case 4: return "Fuerte 💪";
             case 5: return "Muy fuerte🔒";
+            default: return "Indefinido";
+        }
