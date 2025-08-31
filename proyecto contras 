@@ -70,3 +70,5 @@ if (contrasena.length() >= 12) nivel++;
             case 5: return "Muy fuerte🔒";
             default: return "Indefinido";
         }
+    }
+}
