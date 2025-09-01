@@ -60,14 +60,14 @@ if (contrasena.matches(".*[#\\$%&*].*")) nivel++;
 // Tiene símbolos
 if (contrasena.length() >= 12) nivel++;  
 // Longitud suficiente
-// Clasificación
+// Clasificación de nivel de seguridad
    switch (nivel) {
             case 0:
-            case 1: return "Muy débil ❌"
-            case 2: return "Débil ⚠️";
-            case 3: return "Aceptable 🙂";
-            case 4: return "Fuerte 💪";
-            case 5: return "Muy fuerte🔒";
+            case 1: return "Muy débil "
+            case 2: return "Débil";
+            case 3: return "Aceptable";
+            case 4: return "Fuerte";
+            case 5: return "Muy fuerte";
             default: return "Indefinido";
         }
     }
