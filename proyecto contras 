@@ -47,8 +47,9 @@ public class GenerarContrasena {
 
 
 // realizamlos un metodo para evaluar la fortaleza 
+// volver a revisar ordenar 
  
-Public static string 
+Public static string
 Evaluarfortaleza(string contrasena) {
      Int nivel = 0;
 If 
