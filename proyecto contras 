@@ -46,7 +46,7 @@ public class GenerarContrasena {
 } 
 
 
-// realizamlos un metodo para evaluar la fortaleza 
+// realizamlos un metodo para evaluar las fortalezas de las contraseñas 
 // 
  
 Public static string
