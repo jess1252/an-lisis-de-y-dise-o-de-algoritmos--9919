@@ -28,7 +28,7 @@ public class GenerarContrasena {
         Random random = new Random();
 
 
-        // Generar la contraseña con una estructura repetitiva for
+        // Generar la contraseña 
         for (int i = 0; i < longitud; i++) {
             int indice = random.nextInt(caracteres.length());
             contrasena.append(caracteres.charAt(indice));
