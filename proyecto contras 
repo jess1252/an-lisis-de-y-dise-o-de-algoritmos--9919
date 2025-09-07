@@ -47,7 +47,7 @@ public class GenerarContrasena {
 
 
 // realizamlos un metodo para evaluar las fortalezas de las contraseñas 
-// 
+// el algoritmo es correcto 
  
 Public static string
 Evaluarfortaleza(string contrasena) {
