@@ -58,7 +58,7 @@ public class GenerarContrasenaGUI {
         frame.add(lblResultado);
         frame.add(lblOrdenada);
 
-        // Mostrar ventana
+        // Mostrar ventana con jar
         frame.setVisible(true);
     }
 }
