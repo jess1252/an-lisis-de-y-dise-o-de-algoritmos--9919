@@ -19,7 +19,7 @@ public class GenerarContrasenaGUI {
     public static void main(String[] args) {
         // Crear ventana
         JFrame frame = new JFrame("Generador de Contraseñas");
-        frame.setSize(400, 300);
+        frame.setSize(400, 350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
 
@@ -27,6 +27,7 @@ public class GenerarContrasenaGUI {
         JButton btnGenerar = new JButton("Generar Contraseña");
         JLabel lblResultado = new JLabel("Haz clic en el botón para generar");
         JLabel lblOrdenada = new JLabel("");
+        JLabel lblCombinaciones = new JLabel("");
 
         btnGenerar.addActionListener((ActionEvent e) -> {
             // Configuración de caracteres
@@ -34,31 +35,39 @@ public class GenerarContrasenaGUI {
                     + "abcdefghijklmnopqrstuvwxyz"
                     + "0123456789"
                     + "#$%&*";
-            
+
             int longitud = 8;
+            int cantidadCaracteres = caracteres.length(); // n
+            double combinaciones = Math.pow(cantidadCaracteres, longitud); // n^k
+
+            // Generar contraseña
             StringBuilder contrasena = new StringBuilder();
             Random random = new Random();
-            
+
             for (int i = 0; i < longitud; i++) {
-                int indice = random.nextInt(caracteres.length());
+                int indice = random.nextInt(cantidadCaracteres);
                 contrasena.append(caracteres.charAt(indice));
             }
-            
+
             // Mostrar contraseña generada
             lblResultado.setText("Contraseña: " + contrasena);
-            
+
             // Ordenar la contraseña
             char[] arreglo = contrasena.toString().toCharArray();
             Arrays.sort(arreglo);
             lblOrdenada.setText("Ordenada: " + new String(arreglo));
+
+            // Mostrar combinaciones posibles
+            lblCombinaciones.setText("Posibles combinaciones: " + String.format("%.0f", combinaciones));
         });
 
         // Agregar componentes a la ventana
         frame.add(btnGenerar);
         frame.add(lblResultado);
         frame.add(lblOrdenada);
+        frame.add(lblCombinaciones);
 
-        // Mostrar ventana con jar
+        // Mostrar ventana
         frame.setVisible(true);
     }
 }
