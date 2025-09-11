@@ -30,7 +30,7 @@ public class GenerarContrasenaGUI {
         JLabel lblCombinaciones = new JLabel("");
 
         btnGenerar.addActionListener((ActionEvent e) -> {
-            // Configuración de caracteres
+            // Configuración de los  caracteres
             String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     + "abcdefghijklmnopqrstuvwxyz"
                     + "0123456789"
