@@ -40,7 +40,7 @@ public class GenerarContrasenaGUI {
             int cantidadCaracteres = caracteres.length(); // n
             double combinaciones = Math.pow(cantidadCaracteres, longitud); // n^k
 
-            // Generar contraseña
+            // Generar contraseña +
             StringBuilder contrasena = new StringBuilder();
             Random random = new Random();
 
