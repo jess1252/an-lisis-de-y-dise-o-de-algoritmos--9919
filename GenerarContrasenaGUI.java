@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class GenerarContrasenaGUI {
 
     public static void main(String[] args) {
-        // Crear ventana
+        // Crear ventanas 
         JFrame frame = new JFrame("Generador de Contraseñas");
         frame.setSize(400, 350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
