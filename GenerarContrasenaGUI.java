@@ -23,7 +23,7 @@ public class GenerarContrasenaGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
 
-        // Botón para generar contraseñas
+        // Botón para generar contraseña
         JButton btnGenerar = new JButton("Generar Contraseña");
         JLabel lblResultado = new JLabel("Haz clic en el botón para generar");
         JLabel lblOrdenada = new JLabel("");
