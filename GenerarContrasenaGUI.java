@@ -49,7 +49,7 @@ public class GenerarContrasenaGUI {
                 contrasena.append(caracteres.charAt(indice));
             }
 
-            // Mostrar contraseñas generadas
+            // Mostrar contraseñass generadas
             lblResultado.setText("Contraseña: " + contrasena);
 
             // Ordenar la contraseña
