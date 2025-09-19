@@ -59,6 +59,14 @@ public class GenerarContrasenaGUI {
 
             // Mostrar combinaciones posibles
             lblCombinaciones.setText("Posibles combinaciones: " + String.format("%.0f", combinaciones));
+// === Inserción en tabla hash (dispersión) ===
+            int hash = Math.abs(contrasena.toString().hashCode()) % tablaHash.length;
+            tablaHash[hash] = contrasena.toString();
+
+            // Mostrar dónde se guardó
+            JOptionPane.showMessageDialog(frame,
+                    "La contraseña se insertó en la tabla hash.\nÍndice: " + hash +
+                    "\nValor: " + contrasena);
         });
 
         // Agregar componentes a la ventana
