@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package mycompany.generarcontrasenagui;
+package com.mycompany.generarcontrasenagui;
 
 /**
  *
- * @author pc
+ * @author LAB-USR-AREQUIPA
  */
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class GenerarContrasenaGUI {
+    static String[] tablaHash = new String[10];
 
     public static void main(String[] args) {
         // Crear ventanas 
@@ -59,7 +60,7 @@ public class GenerarContrasenaGUI {
 
             // Mostrar combinaciones posibles
             lblCombinaciones.setText("Posibles combinaciones: " + String.format("%.0f", combinaciones));
-// === Inserción en tabla hash (dispersión) ===
+        // === Inserción en tabla hash (dispersión) ===
             int hash = Math.abs(contrasena.toString().hashCode()) % tablaHash.length;
             tablaHash[hash] = contrasena.toString();
 
