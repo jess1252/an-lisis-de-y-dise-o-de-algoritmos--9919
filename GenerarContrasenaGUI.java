@@ -64,7 +64,7 @@ public class GenerarContrasenaGUI {
             int hash = Math.abs(contrasena.toString().hashCode()) % tablaHash.length;
             tablaHash[hash] = contrasena.toString();
 
-            // Mostrar dónde se guardó
+            // Mostrar dónde se guardó la contraseña 
             JOptionPane.showMessageDialog(frame,
                     "La contraseña se insertó en la tabla hash.\nÍndice: " + hash +
                     "\nValor: " + contrasena);
