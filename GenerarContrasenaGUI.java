@@ -53,7 +53,7 @@ public class GenerarContrasenaGUI {
             // Mostrar contraseñass generadas
             lblResultado.setText("Contraseña: " + contrasena);
 
-            // Ordenar la contraseña
+            // Ordenar las contraseñas
             char[] arreglo = contrasena.toString().toCharArray();
             Arrays.sort(arreglo);
             lblOrdenada.setText("Ordenada: " + new String(arreglo));
