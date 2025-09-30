@@ -60,7 +60,7 @@ public class GenerarContrasenaGUI {
 
             // Mostrar combinaciones posibles
             lblCombinaciones.setText("Posibles combinaciones: " + String.format("%.0f", combinaciones));
-        // === Inserción en tablas hash (dispersión) ===
+        // === Nuevo apartado Inserción en tablas hash (dispersión) ===
             int hash = Math.abs(contrasena.toString().hashCode()) % tablaHash.length;
             tablaHash[hash] = contrasena.toString();
 
