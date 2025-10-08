@@ -80,3 +80,4 @@ public class GenerarContrasenaGUI {
         frame.setVisible(true);
     }
 }
+//nuevo aparto usando la herramienta hashing de busqueda externa 
