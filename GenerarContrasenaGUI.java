@@ -18,7 +18,7 @@ public class GenerarContrasenaGUI {
     static String[] tablaHash = new String[10];
 
     public static void main(String[] args) {
-        // Crear la ventanas
+        // Crear las ventanas
         JFrame frame = new JFrame("Generador de Contraseñas");
         frame.setSize(400, 350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
