@@ -81,3 +81,4 @@ public class GenerarContrasenaGUI {
     }
 }
 //nuevo aparto usando la herramienta hashing de busqueda externa 
+ Public void 
