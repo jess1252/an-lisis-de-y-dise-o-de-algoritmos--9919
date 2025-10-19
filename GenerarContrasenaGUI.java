@@ -196,7 +196,7 @@ public class GenerarContrasenaGUI {
         return new SearchResult(false, -1, probes); // recorrido completo, no encontrada
     }
 
-    // Índice hash seguro (evitando problema de Integer.MIN_VALUE)
+    // Índice hash seguros (evitando problema de Integer.MIN_VALUE)
     static int hashIndex(String key, int tableSize) {
         int raw = key.hashCode();
         int positive = raw & 0x7fffffff; // hace el valor no negativo
