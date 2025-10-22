@@ -203,3 +203,4 @@ public class GenerarContrasenaGUI {
         return positive % tableSize;
     }
 }
+// NUEVO APARTO DE FUNCION QICK SORT
