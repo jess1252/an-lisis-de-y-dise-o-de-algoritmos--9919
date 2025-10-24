@@ -203,4 +203,4 @@ public class GenerarContrasenaGUI {
         return positive % tableSize;
     }
 }
-// NUEVO APARTO DE FUNCION mert SORT
+// NUEVO APARTO DE FUNCION mert SORT.
