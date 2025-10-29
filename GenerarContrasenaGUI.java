@@ -31,7 +31,7 @@ public class GenerarContrasenaGUI {
         JLabel lblOrdenada = new JLabel("");
         JLabel lblCombinaciones = new JLabel("");
 
-        // Nuevo apartado: búsqued externa
+        // Nuevo apartado: búsqueda externa
         JTextField txtBuscar = new JTextField(20);
         JButton btnBuscar = new JButton("Buscar en tabla hash");
         JLabel lblBusquedaResultado = new JLabel("");
