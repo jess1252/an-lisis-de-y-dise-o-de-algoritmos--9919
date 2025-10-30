@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class GenerarContrasenaGUI {
-    // Tabla hash simple (open addressing - linear probing)
+    // Tabla hash simpl (open addressing - linear probing)
     static String[] tablaHash = new String[10];
 
     public static void main(String[] args) {
