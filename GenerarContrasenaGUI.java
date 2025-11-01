@@ -204,3 +204,4 @@ public class GenerarContrasenaGUI {
     }
 }
 // NUEVO APARTO DE FUNCION mert SORT
+Contrasena cont = new contrasena
