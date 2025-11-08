@@ -203,5 +203,5 @@ public class GenerarContrasenaGUI {
         return positive % tableSize;
     }
 }
-// NUEVO APARTO DE FUNCION mert SORTs
+// NUEVO APARTO DE FUNCION merts SORTs
 Contrasena cont = new contrasena
