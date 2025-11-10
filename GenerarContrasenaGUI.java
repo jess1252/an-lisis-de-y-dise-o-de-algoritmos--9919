@@ -36,7 +36,7 @@ public class GenerarContrasenaGUI {
         JButton btnBuscar = new JButton("Buscar en tabla hash");
         JLabel lblBusquedaResultado = new JLabel("");
 
-        // Botón para mostrar tabla
+        // Botón para mostrar tablas
         JButton btnMostrarTabla = new JButton("Mostrar Tabla Hash");
 
         btnGenerar.addActionListener((ActionEvent e) -> {
