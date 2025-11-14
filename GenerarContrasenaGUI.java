@@ -15,42 +15,100 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class GenerarContrasenaGUI {
-    // Tabla hash simpl (open addressing - linear probing)
+    // Tabla hash simple (open addressing - linear probing)
     static String[] tablaHash = new String[10];
 
+    // ------------------------------------------------------------
+    //              MATRIZ Y BACKTRACKING (LABERINTO)
+    // ------------------------------------------------------------
+    static char[][] grid = {
+        {'A','b','3','x'},
+        {'#','C','9','Q'},
+        {'z','8','%','d'},
+        {'F','@','2','m'}
+    };
+
+    static boolean[][] visited = new boolean[4][4];
+    static String contrasenaBacktracking = "";
+    static int objetivoLongitud = 8;
+
+    // algoritmo de backtracking
+    static boolean generarBacktracking(int fila, int col) {
+        if (fila < 0 || col < 0 || fila >= 4 || col >= 4) return false;
+        if (visited[fila][col]) return false;
+
+        if (contrasenaBacktracking.length() == objetivoLongitud) return true;
+
+        visited[fila][col] = true;
+        contrasenaBacktracking += grid[fila][col];
+
+        int[][] movs = {{-1,0},{0,1},{1,0},{0,-1}}; // arriba, derecha, abajo, izquierda
+
+        for (int[] m : movs) {
+            if (generarBacktracking(fila + m[0], col + m[1])) return true;
+        }
+
+        // Retrocedemos (backtrack)
+        contrasenaBacktracking =
+                contrasenaBacktracking.substring(0, contrasenaBacktracking.length() - 1);
+        visited[fila][col] = false;
+
+        return false;
+    }
+
+    static String generarContrasenaLaberinto() {
+        for (int i = 0; i < 4; i++)
+            Arrays.fill(visited[i], false);
+
+        contrasenaBacktracking = "";
+
+        for (int f = 0; f < 4; f++) {
+            for (int c = 0; c < 4; c++) {
+                if (generarBacktracking(f, c)) {
+                    return contrasenaBacktracking;
+                }
+            }
+        }
+
+        return "(No se pudo generar)";
+    }
+
+
+    // ------------------------------------------------------------
+    //                        MAIN GUI
+    // ------------------------------------------------------------
     public static void main(String[] args) {
-        // Crear toda la ventana
         JFrame frame = new JFrame("Generador de Contraseñas - con búsqueda");
-        frame.setSize(520, 380);
+        frame.setSize(600, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
 
-        // Componentes
-        JButton btnGenerar = new JButton("Generar Contraseña");
+        JButton btnGenerar = new JButton("Generar Contraseña Aleatoria");
+        JButton btnBacktracking = new JButton("Generar con Backtracking (Laberinto)");
+
         JLabel lblResultado = new JLabel("Haz clic en el botón para generar");
         JLabel lblOrdenada = new JLabel("");
         JLabel lblCombinaciones = new JLabel("");
 
-        // Nuevo apartado: búsqueda externa
         JTextField txtBuscar = new JTextField(20);
-        JButton btnBuscar = new JButton("Buscar en tabla hash");
+        JButton btnBuscar = new JButton("Buscar en Tabla Hash");
         JLabel lblBusquedaResultado = new JLabel("");
 
-        // Botón para mostrar tablas
         JButton btnMostrarTabla = new JButton("Mostrar Tabla Hash");
 
+        // ------------------------------------------------------------
+        // BOTÓN CONTRASEÑA ALEATORIA
+        // ------------------------------------------------------------
         btnGenerar.addActionListener((ActionEvent e) -> {
-            // Configuraciónes de los caracteres
             String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     + "abcdefghijklmnopqrstuvwxyz"
                     + "0123456789"
                     + "#$%&*";
 
             int longitud = 8;
-            int cantidadCaracteres = caracteres.length(); // n
-            double combinaciones = Math.pow(cantidadCaracteres, longitud); // n^k
+            int cantidadCaracteres = caracteres.length();
+            double combinaciones = Math.pow(cantidadCaracteres, longitud);
 
-            // Generar contraseña
             StringBuilder contrasena = new StringBuilder();
             Random random = new Random();
 
@@ -59,30 +117,41 @@ public class GenerarContrasenaGUI {
                 contrasena.append(caracteres.charAt(indice));
             }
 
-            // Mostrar la contraseña generada
             lblResultado.setText("Contraseña: " + contrasena);
 
-            // Ordenar la contraseña (solo como demostración)
             char[] arreglo = contrasena.toString().toCharArray();
             Arrays.sort(arreglo);
-            lblOrdenada.setText("Ordenada: " + new String(arreglo));
 
-            // Mostrar combinaciones posibles
+            lblOrdenada.setText("Ordenada: " + new String(arreglo));
             lblCombinaciones.setText("Posibles combinaciones: " + String.format("%.0f", combinaciones));
 
-            // Inserción en tabla hash usando linear probing (manejo de colisiones)
             InsertResult res = insertarEnHash(contrasena.toString());
             if (res.inserted) {
                 JOptionPane.showMessageDialog(frame,
-                        "La contraseña se insertó en la tabla hash.\nÍndice: " + res.index +
-                        "\nValor: " + contrasena +
-                        "\nSondeos realizados: " + res.probes);
+                        "Insertado en tabla hash.\nÍndice: " + res.index +
+                        "\nClave: " + contrasena +
+                        "\nSondeos: " + res.probes);
             } else {
-                JOptionPane.showMessageDialog(frame,
-                        "No se pudo insertar la contraseña: tabla hash llena.");
+                JOptionPane.showMessageDialog(frame, "Tabla llena, no se pudo insertar.");
             }
         });
 
+        // ------------------------------------------------------------
+        // BOTÓN BACKTRACKING (LABERINTO)
+        // ------------------------------------------------------------
+        btnBacktracking.addActionListener((ActionEvent e) -> {
+            String clave = generarContrasenaLaberinto();
+
+            JOptionPane.showMessageDialog(frame,
+                    "Contraseña generada por Backtracking:\n" + clave);
+
+            insertarEnHash(clave);
+        });
+
+
+        // ------------------------------------------------------------
+        // BÚSQUEDA
+        // ------------------------------------------------------------
         btnBuscar.addActionListener((ActionEvent e) -> {
             String clave = txtBuscar.getText().trim();
             if (clave.isEmpty()) {
@@ -92,46 +161,51 @@ public class GenerarContrasenaGUI {
 
             SearchResult sres = buscarEnHash(clave);
             if (sres.found) {
-                lblBusquedaResultado.setText("Encontrado en índice " + sres.index + " (sondeos: " + sres.probes + ")");
+                lblBusquedaResultado.setText("Encontrado en índice " + sres.index);
                 JOptionPane.showMessageDialog(frame,
                         "Encontrado.\nÍndice: " + sres.index +
-                        "\nValor: " + tablaHash[sres.index] +
-                        "\nSondeos realizados: " + sres.probes);
+                                "\nClave: " + tablaHash[sres.index] +
+                                "\nSondeos: " + sres.probes);
             } else {
-                lblBusquedaResultado.setText("No encontrado (sondeos: " + sres.probes + ")");
+                lblBusquedaResultado.setText("No encontrado");
                 JOptionPane.showMessageDialog(frame,
-                        "No se encontró la clave en la tabla hash.\nSondeos realizados: " + sres.probes);
+                        "No encontrado.\nSondeos: " + sres.probes);
             }
         });
 
+        // Mostrar tabla
         btnMostrarTabla.addActionListener((ActionEvent e) -> {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < tablaHash.length; i++) {
-                sb.append(i).append(": ").append(tablaHash[i] == null ? "<vacío>" : tablaHash[i]).append("\n");
+                sb.append(i).append(": ")
+                        .append(tablaHash[i] == null ? "<vacío>" : tablaHash[i])
+                        .append("\n");
             }
-            JOptionPane.showMessageDialog(frame, sb.toString(), "Contenido de la tabla hash", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, sb.toString(), "Tabla Hash", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        // Agregar componentes a la ventana
+        // ------------------------------------------------------------
+        // AGREGAR COMPONENTES A LA VENTANA
+        // ------------------------------------------------------------
         frame.add(btnGenerar);
+        frame.add(btnBacktracking);
         frame.add(lblResultado);
         frame.add(lblOrdenada);
         frame.add(lblCombinaciones);
 
-        frame.add(new JSeparator(SwingConstants.HORIZONTAL), BorderLayout.CENTER);
         frame.add(new JLabel("Buscar en tabla hash:"));
         frame.add(txtBuscar);
         frame.add(btnBuscar);
         frame.add(lblBusquedaResultado);
 
-        frame.add(new JSeparator(SwingConstants.HORIZONTAL), BorderLayout.CENTER);
         frame.add(btnMostrarTabla);
 
-        // Mostrar ventana
         frame.setVisible(true);
     }
 
-    // Resultado de inserción
+    // ------------------------------------------------------------
+    //                 HASHING
+    // ------------------------------------------------------------
     static class InsertResult {
         boolean inserted;
         int index;
@@ -143,7 +217,6 @@ public class GenerarContrasenaGUI {
         }
     }
 
-    // Insertar con linear probing (encadenamiento abierto)
     static InsertResult insertarEnHash(String valor) {
         int size = tablaHash.length;
         int hash = hashIndex(valor, size);
@@ -152,19 +225,20 @@ public class GenerarContrasenaGUI {
         for (int i = 0; i < size; i++) {
             int idx = (hash + i) % size;
             probes++;
+
             if (tablaHash[idx] == null) {
                 tablaHash[idx] = valor;
                 return new InsertResult(true, idx, probes);
             }
-            // si ya existe exactamente la misma clave, no duplicamos (opcional)
+
             if (tablaHash[idx].equals(valor)) {
-                return new InsertResult(true, idx, probes); // ya existe
+                return new InsertResult(true, idx, probes);
             }
         }
-        return new InsertResult(false, -1, probes); // tabla llena
+
+        return new InsertResult(false, -1, probes);
     }
 
-    // Resultado de búsqueda
     static class SearchResult {
         boolean found;
         int index;
@@ -176,7 +250,6 @@ public class GenerarContrasenaGUI {
         }
     }
 
-    // Buscar en tabla hash usando linear probing (misma estrategia que la inserción)
     static SearchResult buscarEnHash(String clave) {
         int size = tablaHash.length;
         int hash = hashIndex(clave, size);
@@ -185,24 +258,21 @@ public class GenerarContrasenaGUI {
         for (int i = 0; i < size; i++) {
             int idx = (hash + i) % size;
             probes++;
+
             if (tablaHash[idx] == null) {
-                // Si encontramos un espacio vacío, la clave no está (por cómo funciona linear probing)
                 return new SearchResult(false, -1, probes);
             }
+
             if (tablaHash[idx].equals(clave)) {
                 return new SearchResult(true, idx, probes);
             }
         }
-        return new SearchResult(false, -1, probes); // recorrido completo, no encontrada
+        return new SearchResult(false, -1, probes);
     }
 
-    // Índice hash seguros (evitando problema de Integer.MIN_VALUE)
     static int hashIndex(String key, int tableSize) {
         int raw = key.hashCode();
-        int positive = raw & 0x7fffffff; // hace el valor no negativo
+        int positive = raw & 0x7fffffff;
         return positive % tableSize;
     }
 }
-// NUEVO APARTO DE FUNCION merts SORT
-Contrasena cont = new contrasena
-//Aplicando el laberinto
