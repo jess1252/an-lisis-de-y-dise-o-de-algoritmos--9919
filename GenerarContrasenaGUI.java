@@ -19,7 +19,7 @@ public class GenerarContrasenaGUI {
     static String[] tablaHash = new String[10];
 
     // ------------------------------------------------------------
-    //              MATRIZ Y BACKTRACKING (LABERINTO)
+    //              MATRIZ Y BACKTRACKING (LABERINTO
     // ------------------------------------------------------------
     static char[][] grid = {
         {'A','b','3','x'},
