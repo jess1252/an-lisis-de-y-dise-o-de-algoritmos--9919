@@ -18,9 +18,7 @@ public class GenerarContrasenaGUI {
     // Tabla hash simple (open addressing - linear probing)
     static String[] tablaHash = new String[10];
 
-    // ------------------------------------------------------------
-    //              MATRIZ Y BACKTRACKING (LABERINTO
-    // ------------------------------------------------------------
+// Matriz laberinto
     static char[][] grid = {
         {'A','b','3','x'},
         {'#','C','9','Q'},
